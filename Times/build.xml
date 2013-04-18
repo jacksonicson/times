@@ -34,6 +34,6 @@
 		</scp>
 	</target>
 
-	<target name="main" depends="thrift" />
+	<target name="main" depends="prepare, thrift, package" />
 
 </project>
