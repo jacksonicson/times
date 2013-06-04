@@ -213,8 +213,8 @@ class Client(Iface):
 
 
 class Processor(Iface, TProcessor):
-  def __init__(self, handler):
-    self._handler = handler
+  def __init__(self, metric_handler):
+    self._handler = metric_handler
     self._processMap = {}
     self._processMap["find"] = Processor.process_find
     self._processMap["load"] = Processor.process_load
