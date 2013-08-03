@@ -18,9 +18,9 @@ def allocate_domains(name):
         signal.append(element.value)
     
     # Buckets (DSAP paper)
-    blen = len(signal) / 6
+    blen = len(signal) / 48
     bsignal = []
-    for b in xrange(6):
+    for b in xrange(48):
         values = signal[b * blen:(b+1)*blen]
         b = np.percentile(values, 99)
         bsignal.append(b)
@@ -46,4 +46,4 @@ def allocate_domains(name):
                 
 
 if __name__ == '__main__':
-    allocate_domains('SIS_161_cpu_profile_norm')
+    allocate_domains('O2_business_ADDORDER_profile_user')

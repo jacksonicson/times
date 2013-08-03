@@ -21,7 +21,7 @@ try:
         
     ts = connection.load(name)
     for element in ts.elements:
-        print '%i,%i' % (element.timestamp / 1000, element.value)
+        print '%i,%i' % (element.timestamp, element.value)
     
 finally:
     times_client.close()
