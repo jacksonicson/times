@@ -15,9 +15,17 @@ def load_trace(path, identifier, number):
     
     # 5 minutes monitoring frequency
     filename_cpu = identifier + '_' + number + '_cpu'
-    connection.create(filename_cpu, 60 * 5 * 1000)
+    # Check series exists
+    if connection.find(filename_cpu):
+        print 'removing: %s' % filename_cpu 
+        connection.remove(filename_cpu)
+    connection.create(filename_cpu, 60 * 5)
+    
     filename_mem = identifier + '_' + number + '_mem'
-    connection.create(filename_mem, 60 * 5 * 1000)
+    if connection.find(filename_mem):
+        print 'removing: %s' % filename_mem 
+        connection.remove(filename_mem)
+    connection.create(filename_mem, 60 * 5)
      
     # Skip the first line
     reader.next()        
@@ -61,7 +69,7 @@ if __name__ == '__main__':
         
         # Load it
         try:
-            load_trace(path, 'SIS', timeseries_number)
+            load_trace(path, 'RAW_SIS', timeseries_number)
         except Exception, e:
             print 'Could not process %s' % (path)
             continue

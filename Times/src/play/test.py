@@ -23,7 +23,7 @@ def print_matrix(matrix):
         
         print ''
 
-def classify0(inX, dataSet, labels, k):
+def classify0(inX, dataSet, labels, col):
     dataSetSize = dataSet.shape[0]
     diffMat = tile(inX, (dataSetSize, 1)) - dataSet
     sqDiffMat = diffMat ** 2
@@ -31,7 +31,7 @@ def classify0(inX, dataSet, labels, k):
     distances = sqDistances ** 0.5
     sortedDistIndicies = distances.argsort()     
     classCount = {}          
-    for i in range(k):
+    for i in range(col):
         voteIlabel = labels[sortedDistIndicies[i]]
         classCount[voteIlabel] = classCount.get(voteIlabel, 0) + 1
     sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
@@ -256,8 +256,8 @@ for ent in names:
 #    print lookup.data
     
 #    pts = np.array([[-3]])
-#    print lookup.query(pts, k=4)
-#    for i in lookup.query(pts, k=1)[1]:
+#    print lookup.query(pts, col=4)
+#    for i in lookup.query(pts, col=1)[1]:
 #        print labels[i]
     minv = 999
     mini = 0

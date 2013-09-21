@@ -3,7 +3,7 @@ import csv
 from times import ttypes 
 
 def load_trace(path, identifier):
-    print 'loading O2 data from %s' % path
+    print 'loading O2 data from %s -> %s' % (path, identifier)
     ts_file = open(path, 'rU')
     reader = csv.reader(ts_file, delimiter=';', quotechar='"')
     
@@ -17,10 +17,16 @@ def load_trace(path, identifier):
         filename = identifier + '_' + str(line[i])
         ts_names.append(filename)
         ts_elements.append([])
-
+        
+        # Check series exists
+        res = connection.find(filename)
+        if res:
+            print 'removing: %s' % filename 
+            connection.remove(filename)
+        
         # 3 second monitoring frequency
         print 'creating: %s' % (filename)
-        connection.create(filename, 15 * 60 * 1000)
+        connection.create(filename, 60 * 60)
         
     # Timestamp 
     timestamp = 0
@@ -56,7 +62,7 @@ if __name__ == '__main__':
 
     for ts_file in files:
         print ts_file
-        load_trace(ts_file[0], 'O2_%s' % (ts_file[1]))
+        load_trace(ts_file[0], 'RAW_O2_%s' % (ts_file[1]))
 
     # Close connection
     times_client.close()

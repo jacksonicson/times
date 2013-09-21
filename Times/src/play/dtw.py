@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
-# An pure python implemetation of Dynamic Time Warpping
-# http://en.wikipedia.org/wiki/Dynamic_time_warping
-
+# Python implemetation of Dynamic Time Warpping (DTW)
+# See http://en.wikipedia.org/wiki/Dynamic_time_warping
 
 class Dtw(object):
     def __init__(self, seq1, seq2, distance_func=None):
@@ -60,3 +58,4 @@ class Dtw(object):
     def calculate(self):
         return self.calculate_backward(len(self._seq1) - 1,
                                        len(self._seq2) - 1)
+        

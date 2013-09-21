@@ -48,33 +48,33 @@ def initialize_ematrix(rows,cols):
     return d
 
 def edit_distance(s,t):
-    n = len(s)
+    row = len(s)
     m = len(t)
-    d = initialize_ematrix(n+1,m+1)
+    d = initialize_ematrix(row+1,m+1)
 
-    for i in range(1,n+1):
+    for i in range(1,row+1):
         for j in range(1,m+1):
             if s[i-1] == t[j-1]:
                 d[i,j] = d[i-1,j-1]
             else:
                 d[i,j] = min(d[i-1,j] + 1, d[i,j-1] + 1, d[i-1,j-1] + 1)
 
-    return d[n,m]
+    return d[row,m]
 
 def edit_distance_vc(s,t, costs = (1,1,1)):
     # edit distance with variable costs
-    n = len(s)
+    row = len(s)
     m = len(t)
-    d = initialize_ematrix(n+1,m+1)
+    d = initialize_ematrix(row+1,m+1)
 
-    for i in range(1,n+1):
+    for i in range(1,row+1):
         for j in range(1,m+1):
             if s[i-1] == t[j-1]:
                 d[i,j] = d[i-1,j-1]
             else:
                 d[i,j] = min(d[i-1,j] + costs[0], d[i,j-1] + costs[1], d[i-1,j-1] + costs[2])
 
-    return d[n,m]
+    return d[row,m]
 
 
 
@@ -84,9 +84,9 @@ def etw_distance(list1, list2, params, costf=lambda x,y: la.norm(x - y)):
     Use dynamic time warping but apply a cost to (insertion, deletion, match)
     """
 
-    n = len(list1)
+    row = len(list1)
     m = len(list2)
-    dtw = initialize_dmatrix(n+1,m+1)
+    dtw = initialize_dmatrix(row+1,m+1)
 
     icost = params[0]
     dcost = params[1]
@@ -100,13 +100,13 @@ def etw_distance(list1, list2, params, costf=lambda x,y: la.norm(x - y)):
             cost = costf(x,y)
             dtw[i,j] = cost + min(dtw[i-1,j] + icost, dtw[i,j-1] + dcost, dtw[i-1][j-1] + mcost)
 
-    return dtw[n,m]
+    return dtw[row,m]
 
 def dtw_distance(list1, list2, costf=lambda x,y: la.norm(x - y) ):
 
-    n = len(list1)
+    row = len(list1)
     m = len(list2)
-    dtw = initialize_dmatrix(n+1,m+1)
+    dtw = initialize_dmatrix(row+1,m+1)
 
     for (i,x) in enumerate(list1):
         i += 1
@@ -116,13 +116,13 @@ def dtw_distance(list1, list2, costf=lambda x,y: la.norm(x - y) ):
             cost = costf(x,y)
             dtw[i,j] = cost + min(dtw[i-1,j],dtw[i,j-1],dtw[i-1][j-1])
 
-    return dtw[n,m]
+    return dtw[row,m]
 
 def dtw_wdistance(list1, list2, w, costf=lambda x,y: la.norm(x - y)):
 
-    n = len(list1)
+    row = len(list1)
     m = len(list2)
-    dtw = initialize_dmatrix(n+1,m+1)
+    dtw = initialize_dmatrix(row+1,m+1)
 
     for (i,x) in enumerate(list1):
         for j in range(max(0,i-w),min(m,i+w)):
@@ -130,7 +130,7 @@ def dtw_wdistance(list1, list2, w, costf=lambda x,y: la.norm(x - y)):
             cost = costf(x,y)
             dtw[i,j] = cost + min(dtw[i-1,j],dtw[i,j-1],dtw[i-1][j-1])
 
-    return dtw[n-1,m-1]
+    return dtw[row-1,m-1]
 
 
 
