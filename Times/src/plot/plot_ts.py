@@ -46,4 +46,4 @@ def allocate_domains(name):
                 
 
 if __name__ == '__main__':
-    allocate_domains('O2_business_ADDORDER_profile_user')
+    allocate_domains('TSNAME')

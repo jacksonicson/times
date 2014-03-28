@@ -2,7 +2,7 @@ from service import times_client
 
 connection = times_client.connect()
 
-result = connection.find('PUSER_MIXMKII_SIS_91_cpu')
+result = connection.find('TS_NAME')
 for i in result:
     print i
 
