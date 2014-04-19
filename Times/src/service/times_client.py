@@ -6,10 +6,14 @@ from times import TimeService
 transport = None
 client = None
 
-def connect():
+# Ports
+port_MKI = 7856
+port_MKII = 7855
+
+def connect(port=port_MKII):
     global transport
     global client
-    transport = TSocket.TSocket('monitor0.dfg', 7855)
+    transport = TSocket.TSocket('monitor0.dfg', port)
     transport = TTransport.TBufferedTransport(transport)
     protocol = TBinaryProtocol.TBinaryProtocol(transport)
     client = TimeService.Client(protocol)
