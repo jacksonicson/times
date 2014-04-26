@@ -27,7 +27,7 @@ class Download(argparse.Action):
             name = values
             port = times_client.port_MKII    
             if namespace.version == 1:
-                if sys.argv[2] == 'MKI':
+                if namespace.version == 1:
                     port = times_client.port_MKI
                 else:
                     port = times_client.port_MKII
@@ -35,7 +35,7 @@ class Download(argparse.Action):
             connection = times_client.connect(port)
             result = connection.find(name)
             if len(result) == 0:
-                print '0,0' %name
+                print '0,0'
                 sys.exit(1)
             
             ts = connection.load(name)
