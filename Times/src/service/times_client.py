@@ -7,10 +7,12 @@ transport = None
 client = None
 
 # Ports
+port_DEFAULT = 7855
 port_MKI = 7856
-port_MKII = 7855
+port_MKII = 7858
+port_MKII2 = 7857
 
-def connect(port=port_MKII):
+def connect(port=port_MKII2):
     global transport
     global client
     transport = TSocket.TSocket('monitor0.dfg', port)

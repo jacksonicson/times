@@ -12,7 +12,7 @@ if len(sys.argv) < 2:
 
 try:
     name = sys.argv[1]
-    port = times_client.port_MKII    
+    port = times_client.port_DEFAULT
     if len(sys.argv) > 2:
         if sys.argv[2] == 'MKI':
             port = times_client.port_MKI
@@ -25,9 +25,11 @@ try:
         print 'No TS found with name: %s' %name
         sys.exit(1)
     
+    print 'Time, Value'
     ts = connection.load(name)
     for element in ts.elements:
         print '%i,%i' % (element.timestamp, element.value)
+    sys.stdout.flush()
     
 finally:
     times_client.close()
